@@ -1,4 +1,6 @@
 import Logo from "./assets/Logo-NLW.svg";
+import { NewNotes } from "./components/NewNotes";
+import { Note } from "./components/Note";
 
 export const App = () => {
   return (
@@ -13,6 +15,11 @@ export const App = () => {
       </form>
 
       <div className="h-px w-full bg-slate-500"></div>
+
+      <div className="grid grid-cols-3 gap-6 auto-rows-[250px]">
+        <NewNotes />
+        <Note />
+      </div>
     </div>
   );
 };
