@@ -3,6 +3,11 @@ import { NewNotes } from "./components/NewNotes";
 import { Note } from "./components/Note";
 
 export const App = () => {
+  const note = {
+    date: new Date(),
+    content: "Primeira nota",
+  };
+
   return (
     <div className="max-w-6xl mx-auto my-12 space-y-4">
       <img src={Logo} alt="Logo NLW Expert" />
@@ -18,7 +23,7 @@ export const App = () => {
 
       <div className="grid grid-cols-3 gap-6 auto-rows-[250px]">
         <NewNotes />
-        <Note />
+        <Note note={note} />
       </div>
     </div>
   );
