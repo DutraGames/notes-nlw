@@ -1,6 +1,28 @@
 import * as Dialog from "@radix-ui/react-dialog";
-
+import { useState, ChangeEvent, FormEvent } from "react";
+import { toast } from "sonner";
 export const NewNotes = () => {
+  const [shouldShowOnboarding, setShouldShowOnboarding] =
+    useState<boolean>(true);
+  const [content, setContent] = useState<string>("");
+
+  const handleShowEditor = () => {
+    setShouldShowOnboarding(false);
+  };
+
+  const handleContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.target.value);
+    if (e.target.value === "") {
+      setShouldShowOnboarding(true);
+    }
+  };
+
+  const handleOnSave = (e: FormEvent) => {
+    e.preventDefault();
+    console.log(content);
+    toast.success("Nota adicionada com sucesso!");
+  };
+
   return (
     <Dialog.Root>
       <Dialog.Trigger
@@ -27,30 +49,44 @@ export const NewNotes = () => {
           <Dialog.Close className="absolute top-0 right-0 bg-slate-800 p-5">
             <span className="size-5 houver:text-slate-100">X</span>
           </Dialog.Close>
-          <div className="flex flex-1 flex-col gap-3 p-5">
-            <span className="text-slate-300 text-sm font-medium">
-              Adicionar Nota
-            </span>
-            <p className="text-slate-400 leading-6 text-sm">
-              Comece{" "}
-              <button className="text-lime-400 font-medium hover:underline">
-                gravando uma nota
-              </button>{" "}
-              em áudio ou se preferir
-              <button className="text-lime-400 font-medium hover:underline">
-                utilize apenas texto
-              </button>
-              .
-            </p>
-          </div>
+          <form onSubmit={handleOnSave} className="flex flex-1 flex-col">
+            <div className="flex flex-1 flex-col gap-3 p-5">
+              <span className="text-slate-300 text-sm font-medium">
+                Adicionar Nota
+              </span>
+              {shouldShowOnboarding ? (
+                <p className="text-slate-400 leading-6 text-sm">
+                  Comece{" "}
+                  <button className="text-lime-400 font-medium hover:underline">
+                    gravando uma nota
+                  </button>{" "}
+                  em áudio ou se preferir{" "}
+                  <button
+                    className="text-lime-400 font-medium hover:underline"
+                    onClick={handleShowEditor}
+                  >
+                    utilize apenas texto
+                  </button>
+                  .
+                </p>
+              ) : (
+                <textarea
+                  autoFocus
+                  className="bg-transparent text-sm text-slate-400 leading-6
+                outline-none resize-none flex-1"
+                  onChange={handleContentChange}
+                ></textarea>
+              )}
+            </div>
 
-          <button
-            type="button"
-            className="w-full bg-lime-400 text-lime-950 py-4 text-center text-sm 
+            <button
+              type="submit"
+              className="w-full bg-lime-400 text-lime-950 py-4 text-center text-sm 
             outline-none font-medium hover:bg-lime-500"
-          >
-            Salvar nota
-          </button>
+            >
+              Salvar nota
+            </button>
+          </form>
         </Dialog.DialogContent>
       </Dialog.Portal>
     </Dialog.Root>
