@@ -36,7 +36,7 @@ export const Note = ({ note, onDeleteNote }: NoteProps) => {
         <Dialog.DialogContent
           className="fixed inset-0 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 
           bg-slate-700 md:max-w-[640px] w-full md:rounded-md flex flex-col outline-none
-          overflow-hidden h-[60vh]"
+          overflow-hidden h-full md:h-[60vh]"
         >
           <Dialog.Close className="absolute top-0 right-0 bg-slate-800 p-5">
             <span className="size-5 houver:text-slate-100">X</span>
