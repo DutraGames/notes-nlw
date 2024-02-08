@@ -1,7 +1,12 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { useState, ChangeEvent, FormEvent } from "react";
 import { toast } from "sonner";
-export const NewNotes = () => {
+
+interface NewNotesProps {
+  onAddNote: (content: string) => void;
+}
+
+export const NewNotes = ({ onAddNote }: NewNotesProps) => {
   const [shouldShowOnboarding, setShouldShowOnboarding] =
     useState<boolean>(true);
   const [content, setContent] = useState<string>("");
@@ -19,8 +24,10 @@ export const NewNotes = () => {
 
   const handleOnSave = (e: FormEvent) => {
     e.preventDefault();
-    console.log(content);
     toast.success("Nota adicionada com sucesso!");
+    onAddNote(content);
+    setContent("");
+    setShouldShowOnboarding(true);
   };
 
   return (
@@ -75,6 +82,7 @@ export const NewNotes = () => {
                   className="bg-transparent text-sm text-slate-400 leading-6
                 outline-none resize-none flex-1"
                   onChange={handleContentChange}
+                  value={content}
                 ></textarea>
               )}
             </div>
