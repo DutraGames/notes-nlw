@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import Logo from "./assets/Logo-NLW.svg";
 import { NewNotes } from "./components/NewNotes";
 import { Note } from "./components/Note";
@@ -35,6 +35,17 @@ export const App = () => {
     localStorage.setItem("@notes-nlw", JSON.stringify(arrayNotes));
   };
 
+  const handleSeach = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
+  const filteredNotes =
+    search !== ""
+      ? notes.filter((note) =>
+          note.content.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+        )
+      : notes;
+
   return (
     <div className="max-w-6xl mx-auto my-12 space-y-4">
       <img src={Logo} alt="Logo NLW Expert" />
@@ -43,6 +54,7 @@ export const App = () => {
           type="text"
           placeholder="Pesquisar uma nota..."
           className="bg-transparent text-3xl font-semibold placeholder:text-slate-500 outline-none w-full -tracking-tight"
+          onChange={handleSeach}
         />
       </form>
 
@@ -50,7 +62,7 @@ export const App = () => {
 
       <div className="grid grid-cols-3 gap-6 auto-rows-[250px]">
         <NewNotes onAddNote={onAddNote} />
-        {notes.map((note) => (
+        {filteredNotes.map((note) => (
           <Note key={note.id} note={note} />
         ))}
       </div>
