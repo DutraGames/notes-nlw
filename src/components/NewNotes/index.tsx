@@ -6,13 +6,13 @@ interface NewNotesProps {
   onAddNote: (content: string) => void;
 }
 
+let recognition: SpeechRecognition | null;
+
 export const NewNotes = ({ onAddNote }: NewNotesProps) => {
   const [shouldShowOnboarding, setShouldShowOnboarding] =
     useState<boolean>(true);
   const [content, setContent] = useState<string>("");
   const [isRecording, setIsRecording] = useState<boolean>(false);
-
-  let recognition: SpeechRecognition | null;
 
   const handleShowEditor = () => {
     setShouldShowOnboarding(false);
@@ -77,6 +77,7 @@ export const NewNotes = ({ onAddNote }: NewNotesProps) => {
 
   const handleStopRecording = () => {
     setIsRecording(false);
+    console.log(recognition);
 
     if (recognition !== null) {
       recognition.stop();
