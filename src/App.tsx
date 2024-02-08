@@ -47,7 +47,7 @@ export const App = () => {
       : notes;
 
   return (
-    <div className="max-w-6xl mx-auto my-12 space-y-4">
+    <div className="max-w-6xl mx-auto my-12 space-y-4 px-5">
       <img src={Logo} alt="Logo NLW Expert" />
       <form action="" className="w-full">
         <input
@@ -60,7 +60,7 @@ export const App = () => {
 
       <div className="h-px w-full bg-slate-500"></div>
 
-      <div className="grid grid-cols-3 gap-6 auto-rows-[250px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[250px]">
         <NewNotes onAddNote={onAddNote} />
         {filteredNotes.map((note) => (
           <Note key={note.id} note={note} />

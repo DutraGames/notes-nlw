@@ -32,8 +32,8 @@ export const Note = ({ note }: NoteProps) => {
       <Dialog.Portal>
         <Dialog.Overlay className="bg-black/50 inset-0 fixed" />
         <Dialog.DialogContent
-          className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-          bg-slate-700 max-w-[640px] w-full rounded-md flex flex-col outline-none
+          className="fixed inset-0 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 
+          bg-slate-700 md:max-w-[640px] w-full md:rounded-md flex flex-col outline-none
           overflow-hidden h-[60vh]"
         >
           <Dialog.Close className="absolute top-0 right-0 bg-slate-800 p-5">
