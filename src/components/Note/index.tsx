@@ -3,12 +3,14 @@ import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 interface NoteProps {
   note: {
+    id: string;
     date: Date;
     content: string;
   };
+  onDeleteNote: (id: string) => void;
 }
 
-export const Note = ({ note }: NoteProps) => {
+export const Note = ({ note, onDeleteNote }: NoteProps) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger
@@ -55,7 +57,10 @@ export const Note = ({ note }: NoteProps) => {
             outline-none font-medium group"
           >
             Deseja{" "}
-            <span className="text-red-400 group-hover:underline">
+            <span
+              className="text-red-400 group-hover:underline"
+              onClick={() => onDeleteNote(note.id)}
+            >
               apagar esta nota
             </span>
             ?
